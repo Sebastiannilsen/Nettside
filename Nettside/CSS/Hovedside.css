@@ -1,0 +1,71 @@
+#Forside{
+  width: 100%;
+}
+
+#Populær{
+  text-align: center;
+}
+
+.Populær_sek{
+  padding-top: 80px;
+  padding-bottom: 100px;
+}
+
+.Nyhetsbrev_sek{
+  text-align: center;
+  font-size: 20px;
+}
+
+input{
+  width: 33%;
+  height: 40px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+input[type=text]{
+  border-bottom: solid lightgrey 1px;;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+#btnMeld{
+  background-color: red:
+}
+
+button[type=button]{
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 15px 43px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin-top: 50px;
+}
+
+button[type=button]:hover{
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+#nettsider3{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 23px;
+  width: 82%;
+  margin: auto;
+}
+
+@media screen and (max-width: 1000px){
+  #nettsider3{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 23px;
+    width: 82%;
+    margin: auto;
+  }
+}

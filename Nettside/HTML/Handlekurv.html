@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-firestore.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyANXRqvzovt-F6GsXVF4ddZayPZA2_RaZM",
+        authDomain: "sebastian-eed27.firebaseapp.com",
+        databaseURL: "https://sebastian-eed27.firebaseio.com",
+        projectId: "sebastian-eed27",
+        storageBucket: "sebastian-eed27.appspot.com",
+        messagingSenderId: "73320767581",
+        appId: "1:73320767581:web:37b4ead76f796e1b256db4",
+        measurementId: "G-5KWJ16476S"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+    <link rel="stylesheet" href="../CSS/Nav.css">
+    <link rel="stylesheet" href="../CSS/Handlekurv.css">
+  </head>
+  <body>
+    <section class="top">
+      <ul>GRATIS LEVERING OG RETUR PÅ ALLE ORDRE</ul>
+      <ul>1-3 DAGERS LEVERINGSTID</ul>
+      <ul>30 DAGERS ÅPENT KJØP PÅ ALLE ORDRE</ul>
+      <ul>EKSKLUSIV GAVEINNPAKNING</ul>
+    </section>
+    <header class="Header">
+      <div class="navbar">
+        <div class="dropdown">
+          <button class="dropbtn"><img class="Nav1" src="../Bilder/Nav1.png" alt="">
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <div class="row">
+              <div class="column">
+                <a href="../HTML/Produkter.html"><b>ALLE VARER</b></a>
+                <a href="../HTML/Accessories.html">Accessories</a>
+                <a href="../HTML/Bukser.html">Bukser</a>
+                <a href="../HTML/T-skjorter.html">T-Skjorter</a>
+              </div>
+              <div class="column">
+                  <a href="../HTML/Genser.html">Genser</a>
+                <a href="../HTML/Ytterjakker.html">Yttertøy</a>
+                <a href="../HTML/Badetøy.html">Badetøy</a>
+                <a href="../HTML/Undertøy.html">Undertøy og Pysjamas</a>
+              </div>
+              <div class="column">
+                <a href="#"><b>INFO</b></a>
+                <a href="../HTML/Om.html">Om oss</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="../HTML/Hovedside.html"><img id="Logo" src="../Bilder/GANT_logo.png" alt=""></a>
+      <a class="Handlekurv "href="../HTML/Handlekurv.html">HANDLEKURV</a>
+    </header>
+
+    <section id="Marg">
+      <h1>Din handlekurv</h1>
+
+      <section id="secHandlekurv"></section>
+
+      <div id="divTotalPris"></div>
+
+      <form onsubmit="kjopVarer(event)" id="kjopSec">
+        <button onclick="location.href = 'Hovedside.html';" type="button" id="fortsettHandel" name="fortsettHandel">FORTSETT Å HANDLE</button>
+        <div class="">
+          <input id="inpEpost" type="email" placeholder="Skriv epost" required >
+          <button id="kjopKnapp" type="submit">KJØP NÅ</button>
+        </div>
+      </form>
+
+    </section>
+
+    <script type="text/javascript">
+    // referanser til html-elementer
+    const secHandlekurv = document.querySelector("#secHandlekurv");
+
+    // referanser til databasen
+    const db = firebase.firestore();
+    const varer = db.collection("Nettside");
+    const handlekurv = db.collection("varerIHandlekurv");
+    const divTotalPris = document.querySelector("#divTotalPris");
+
+
+
+    // funksjon som henter alle bøker fra databasen
+    const hentHandlekurv = async () => {
+      secHandlekurv.innerHTML = ""
+      const svar = await handlekurv.orderBy("tid", "desc").get(); // Henter hele handlekurven
+
+      let totalPris = 0; // oppretter en variabel som kan endres
+
+      for await (vare of svar.docs) {
+        const vareIHandlekurvId = vare.id;
+        const vareId = vare.data().vareId; // Får bokId fra varen i handlekurven
+        const vareSvar = await varer.doc(vareId).get(); // Spør etter den aktuelle boken fra boker-kolleksjonen
+        totalPris += vareSvar.data().Pris; // Plusser på prisen til boken i variabelen totalPris
+        console.log(totalPris)
+        lagHTML(vareId, vareSvar.data(), vare.data(), vareIHandlekurvId); // Kjører funksjonen lagHTML på hver bok
+      }
+        divTotalPris.innerHTML = `<b>Sum: ${totalPris},-</b>`; // Skriver prisen ut i divTotalPris
+    }
+
+    function lagHTML(id, nettsideData, handlekurvData, vareIHandlekurvId){
+      secHandlekurv.innerHTML += `
+      <div class="Grid">
+        <div>
+          <img src="${nettsideData["Bilde"]}">
+        </div>
+        <div id="to">
+          <b>${nettsideData["Navn"]}</b>
+          <p>Farge: ${nettsideData["Farge"]}</p>
+          <p>Størrelse: ${handlekurvData["Størrelse"]}</p>
+        </div>
+        <div id="tre">
+          <button id="binIcon" onclick=fjernFraHandlekurv('${vareIHandlekurvId}')><img src="../Bilder/Ikon.png" alt=""></button>
+          <b>${nettsideData["Pris"]},-</b>
+        </div>
+      </div>
+      `
+      }
+
+      const fjernFraHandlekurv = async (vareIHandlekurvId) => {
+        await handlekurv.doc(vareIHandlekurvId).delete(); // Sletter varen fra handlekurven
+        hentHandlekurv(); // Henter handlekurven på nytt
+      }
+
+
+
+    hentHandlekurv(); // Kjører funksjonen hentAlle
+
+    </script>
+    <script type="text/javascript">
+
+    const inpEpost = document.querySelector("#inpEpost")
+    const kjop = db.collection("kjop")
+
+    const kjopVarer = async (event) => {
+    event.preventDefault();
+
+    try{
+        const svar = await handlekurv.get();
+        for await(const vareIHandlekurv of svar.docs){
+            const vareId = vareIHandlekurv.data().vareId;
+            const str = vareIHandlekurv.data().Størrelse
+            // Legger boken i kjop-tabellen
+            await kjop.add({
+              vareId: vareId,
+              Størrelse: str,
+              epost: inpEpost.value
+            });
+            // Sletter varen fra handlekurven
+            await handlekurv.doc(vareIHandlekurv.id).delete();
+        }
+        // Sletter innholdet i secHandlekurv
+        hentHandlekurv();
+        alert("Takk for kjøpet!");
+    }
+
+    catch(err){
+          alert("Kjøpet kunne ikke fullføres");
+        }
+
+    const slett = async (event) => {
+      event.preventDefault();
+
+        await handlekurv.doc(vareIHandlekurv.id).delete();
+      }
+
+    }
+
+
+  </script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

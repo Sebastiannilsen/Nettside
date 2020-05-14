@@ -1,0 +1,115 @@
+Body{
+  background-color: whitesmoke
+}
+
+
+Header{
+  background-color: white;
+}
+
+.Grid{
+  display: flex;
+  grid-gap: 0px;
+  background-color: white;
+  margin-top: 2px;
+  padding: 30px;
+}
+
+img{
+  width: 100px;
+}
+
+
+#to{
+  flex: 1;
+  padding-left: 8px;
+}
+
+#tre{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#Marg{
+  width: 80%;
+  margin: auto;
+}
+
+#divTotalPris{
+  background-color: white;
+  margin-top: 2px;
+  height: 10px;
+  text-align: right;
+  padding: 20px;
+}
+
+#kjopSec{
+  background-color: white;
+  margin-top: 2px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#kjopKnapp{
+  background-color:black;
+  color: white;
+  height: 42px;
+  width: 100px;
+  border: solid black 1px;
+}
+
+#inpEpost{
+  border: solid lightgrey 1px;
+  padding: 12px;
+  height: 16px;
+  width: 200px;
+}
+
+#fortsettHandel{
+  background-color:white;
+  color: black;
+  height: 42px;
+  width: 200px;
+  border: solid black 1px;
+}
+
+@media (max-width:720px){
+  #fortsettHandel{
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  #kjopSec{
+    display: block;
+  }
+
+  #kjopKnapp{
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  #inpEpost{
+    width: 95.4%;
+    border-style: none;
+    padding: 8px 2%;
+    border: solid black 1px;
+    margin-top: 4px;
+
+  }
+
+  }
+
+
+#binIcon{
+  padding: 0%;
+  border: none;
+  background-color: white;
+
+
+}
+
+#binIcon img{
+  width: 20px;
+}

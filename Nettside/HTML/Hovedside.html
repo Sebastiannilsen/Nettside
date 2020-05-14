@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-firestore.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyANXRqvzovt-F6GsXVF4ddZayPZA2_RaZM",
+        authDomain: "sebastian-eed27.firebaseapp.com",
+        databaseURL: "https://sebastian-eed27.firebaseio.com",
+        projectId: "sebastian-eed27",
+        storageBucket: "sebastian-eed27.appspot.com",
+        messagingSenderId: "73320767581",
+        appId: "1:73320767581:web:37b4ead76f796e1b256db4",
+        measurementId: "G-5KWJ16476S"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+    <link rel="stylesheet" href="../CSS/Nav.css">
+    <link rel="stylesheet" href="../CSS/Hovedside.css">
+    <link rel="stylesheet" href="../CSS/Produkter.css">
+  </head>
+  <body>
+    <section class="top">
+      <ul>GRATIS LEVERING OG RETUR PÅ ALLE ORDRE</ul>
+      <ul>1-3 DAGERS LEVERINGSTID</ul>
+      <ul>30 DAGERS ÅPENT KJØP PÅ ALLE ORDRE</ul>
+      <ul>EKSKLUSIV GAVEINNPAKNING</ul>
+    </section>
+    <header class="Header">
+      <div class="navbar">
+        <div class="dropdown">
+          <button class="dropbtn"><img class="Nav1" src="../Bilder/Nav1.png" alt="">
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <div class="row">
+              <div class="column">
+                <a href="../HTML/Produkter.html"><b>ALLE VARER</b></a>
+                <a href="../HTML/Accessories.html">Accessories</a>
+                <a href="../HTML/Bukser.html">Bukser</a>
+                <a href="../HTML/T-skjorter.html">T-Skjorter</a>
+              </div>
+              <div class="column">
+                <a href="../HTML/Genser.html">Genser</a>
+                <a href="../HTML/Ytterjakker.html">Yttertøy</a>
+                <a href="../HTML/Badetøy.html">Badetøy</a>
+                <a href="../HTML/Undertøy.html">Undertøy og Pysjamas</a>
+              </div>
+              <div class="column">
+                <a href="#"><b>INFO</b></a>
+                <a href="../HTML/Om.html">Om oss</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="../HTML/Hovedside.html"><img id="Logo" src="../Bilder/GANT_logo.png" alt=""></a>
+      <a class="Handlekurv "href="../HTML/Handlekurv.html">HANDLEKURV</a>
+    </header>
+
+    <section>
+      <img id="Forside" src="../Bilder/Forside.jpg" alt="">
+    </section>
+
+    <div class="Populær_sek">
+      <h1 id="Populær">Mest populære akkurat nå!</h1>
+      <div id="nettsider3"></div>
+    </div>
+
+
+    <script src="../JS/Populært.js"></script>
+
+    <img src="../Bilder/Folk.jpg" alt="">
+
+
+    <section class="Nyhetsbrev_sek">
+      <h1>Motta vårt nyhetsbrev</h1>
+      <p>Vi gir deg 10% rabatt på din første bestilling i <br>nettbutikken. Rabatten kan ikke kombineres med andre <br>tilbud. Vi lover å holde deg oppdatert om nyheter,<br> tilbud og kampanjer.</p>
+      <div id="divInpt">
+        <input type="text" id="inpNavn" placeholder="      (Skriv inn din e-postadresse)">
+        <br>
+        <button type="button" id="btnMeld" onclick="leggTilMeld()">MELD MEG PÅ</button>
+      </div>
+    </section>
+
+    <script src="../JS/Nyhetsbrev.js"></script>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

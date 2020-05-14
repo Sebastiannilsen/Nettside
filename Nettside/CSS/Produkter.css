@@ -1,0 +1,48 @@
+
+
+#nettsider{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 23px;
+  width: 82%;
+  margin: auto;
+}
+
+.marg{
+  width: 82%;
+  margin: auto;
+}
+
+img{
+  width: 100%;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+a:hover{
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 1100px){
+  #nettsider{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 23px;
+    width: 82%;
+    margin: auto;
+  }
+}
+
+
+@media screen and (max-width: 700px){
+  #nettsider{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 23px;
+    width: 82%;
+    margin: auto;
+  }
+}
